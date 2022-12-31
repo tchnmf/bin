@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Download recursively with nohup and wget
+#   reject junk files
+#   log friendly 'noscroll' output
+
+
+if [ -z "$1" ];then
+  echo "Usage: $0 'http://example.com/'"
+  exit 1
+else
+  wget_url="$1"
+  logfile="$HOME/wget-recursive.log"
+fi
+
+
+echo -e "\n\n# $wget_url \n# $(date)\n\n\n" | tee -a $logfile
+echo "Logfile: $logfile"
+
+nohup wget --progress=bar:force:noscroll  -r --no-parent --reject "index.html*" "$wget_url" >> $logfile &
