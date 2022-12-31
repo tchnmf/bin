@@ -1,0 +1,4 @@
+#/bin/bash
+
+# convert FLAC to 320k mp
+ffmpeg -i $INPUT_FILE.flac -ab 320k -map_metadata 0 -id3v2_version 3 $OUTPUT_FILE.mp3
